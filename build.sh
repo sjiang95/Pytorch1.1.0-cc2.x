@@ -12,3 +12,4 @@ export USE_NCCL=0
 export USE_SYSTEM_NCCL=0
 export CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" # [anaconda root directory]
 python3 setup.py install
+python3 setup.py bdist_wheel

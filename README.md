@@ -2,6 +2,8 @@
 
 This repo makes it possible to use cuda-capable pytorch v1.1.0 on old `Fermi` architecture GPU with cuda compute capability (cc) `2.x`.
 
+In the [PyTorch v1.1.0 release note](https://github.com/pytorch/pytorch/releases/tag/v1.1.0) cuda 8.0 is announced deprecated, which is misleading because what they really mean is PyTorch will not provide official build binaries for cuda 8.0 devices anymore. But since [PyTorch v1.1.0](https://github.com/pytorch/pytorch/tree/v1.1.0#from-source) still support to be built from source with cuda>=7.5,
+
 ## Motivation
 
   1. Have fun.
@@ -12,6 +14,7 @@ This repo makes it possible to use cuda-capable pytorch v1.1.0 on old `Fermi` ar
 --------------------------------------------------------------------------------
 
 PyTorch is a Python package that provides two high-level features:
+
 - Tensor computation (like NumPy) with strong GPU acceleration
 - Deep neural networks built on a tape-based autograd system
 
@@ -20,15 +23,12 @@ You can reuse your favorite Python packages such as NumPy, SciPy and Cython to e
 - [Installation](#installation)
   - [From Source](#from-source)
   - [Building the Documentation](#building-the-documentation)
-  - [Previous Versions](#previous-versions)
-- [Getting Started](#getting-started)
+- [Torchvision](#torchvision)
+- [Verifying](#verifying)
 
 | System | 2.7 | 3.5 | 3.6 |
 | :---: | :---: | :---: | :--: |
-| Linux GPU | [![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon)](https://ci.pytorch.org/jenkins/job/pytorch-master/) | [![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon)](https://ci.pytorch.org/jenkins/job/pytorch-master/) | <center>—</center> |
-
-See also the [ci.pytorch.org HUD](https://ezyang.github.io/pytorch-ci-hud/build/pytorch-master).
-
+| Linux GPU | [![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon)](https://ci.pytorch.org/jenkins/job/pytorch-master/) | [![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon)](https://ci.pytorch.org/jenkins/job/pytorch-master/) | This repo |
 
 ## Installation
 
@@ -71,28 +71,32 @@ Other potentially useful environment variables may be found in `setup.py`.
 
 If you are building for NVIDIA's Jetson platforms (Jetson Nano, TX1, TX2, AGX Xavier), Instructions to [are available here](https://devtalk.nvidia.com/default/topic/1049071/jetson-nano/pytorch-for-jetson-nano/)
 
-
 ### Install Dependencies
 
 Common
-```
+
+```bash
 conda install numpy pyyaml mkl mkl-include setuptools cmake cffi typing ninja
 ```
 
 On Linux
+
 ```bash
 # Add LAPACK support for the GPU if needed
 conda install -c pytorch magma-cuda80
 ```
 
 ### Get the PyTorch Source
+
 ```bash
-git clone --recursive https://github.com/pytorch/pytorch
-cd pytorch
+git clone --recursive https://github.com/AdorableJiang/Pytorch1.1.0-cc2.x.git --branch v1.1.0 --single-branch pytorch110
+cd pytorch110
 ```
 
 ### Install PyTorch
+
 On Linux
+
 ```bash
 ./build.sh
 ```
@@ -104,26 +108,26 @@ In `build.sh`, make sure `CC`, `CXX` and `CUDAHOSTCXX` points to the right `gcc&
 To build documentation in various formats, you will need [Sphinx](http://www.sphinx-doc.org) and the
 readthedocs theme.
 
-```
+```bash
 cd docs/
 pip install -r requirements.txt
 ```
+
 You can then build the documentation by running ``make <format>`` from the
 ``docs/`` folder. Run ``make`` to get a list of all available output formats.
 
-## Previous Versions
+## Torchvision
 
-Installation instructions and binaries for previous PyTorch versions may be found
-on [our website](https://pytorch.org/previous-versions).
+Install torchvision from source for a complete Pytorch experience. Refer to the [table](https://github.com/pytorch/vision#installation), torchvision [0.3.0](https://github.com/pytorch/vision/tree/v0.3.0) should be installed from source. Notice that you may need to install `pillow` manually.
 
+## Verifying
 
-## Getting Started
+Use [Pytorch examples](https://github.com/pytorch/examples) to verify installation.
 
-Three pointers to get you started:
-- [Tutorials: get you started with understanding and using PyTorch](https://pytorch.org/tutorials/)
-- [Examples: easy to understand pytorch code across all domains](https://github.com/pytorch/examples)
-- [The API Reference](https://pytorch.org/docs/)
+## Known issue
+
+Error occurs when running [Basic MNIST Example](https://github.com/pytorch/examples/tree/main/mnist).
 
 ## License
 
-PyTorch is BSD-style licensed, as found in the LICENSE file.
+This project is GPL 3.0 licensed, as found in the LICENSE file.

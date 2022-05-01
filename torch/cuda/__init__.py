@@ -114,8 +114,8 @@ def _check_capability():
             warnings.warn(incorrect_binary_warn % (d, name, 8000, CUDA_VERSION))
         elif CUDA_VERSION < 9000 and major >= 7:
             warnings.warn(incorrect_binary_warn % (d, name, 9000, CUDA_VERSION))
-        elif capability == (3, 0) or major < 3:
-            warnings.warn(old_gpu_warn % (d, name, major, capability[1]))
+        # elif capability == (3, 0) or major < 3:
+        #     warnings.warn(old_gpu_warn % (d, name, major, capability[1]))
 
 
 def _lazy_call(callable):

@@ -156,6 +156,12 @@ def run_shell_commands_in_parallel(commands):
     finally:
         os.unlink(f.name)
 
+try:
+    # use faster C loader if available
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
+
 
 def run_clang_tidy(options, line_filters, files):
     """Executes the actual clang-tidy command in the shell."""
@@ -167,7 +173,7 @@ def run_clang_tidy(options, line_filters, files):
 
         with open(options.config_file) as config:
             # Here we convert the YAML config file to a JSON blob.
-            command += ["-config", json.dumps(yaml.load(config))]
+            command += ["-config", json.dumps(yaml.load(config,Loader=Loader))]
     command += options.extra_args
 
     if line_filters:

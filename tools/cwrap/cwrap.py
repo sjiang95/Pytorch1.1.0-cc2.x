@@ -6,6 +6,12 @@ from .plugins import ArgcountChecker, OptionalArguments, ArgumentReferences, \
     BeforeAfterCall, ConstantArguments, ReturnArguments, GILRelease
 from ..shared import cwrap_common
 
+try:
+    # use faster C loader if available
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
+
 
 class cwrap(object):
     BASE_INDENT_SIZE = 6
@@ -88,7 +94,7 @@ class cwrap(object):
                 in_declaration = True
             elif line == ']]':
                 in_declaration = False
-                declaration = yaml.load('\n'.join(declaration_lines))
+                declaration = yaml.load('\n'.join(declaration_lines),Loader=Loader)
                 cwrap_common.set_declaration_defaults(declaration)
 
                 # Pass declaration in a list - maybe some plugins want to add

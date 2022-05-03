@@ -15,6 +15,12 @@ all_operators_with_namedtuple_return = {
     'triangular_solve'
 }
 
+try:
+    # use faster C loader if available
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
+
 
 class TestNamedTupleAPI(unittest.TestCase):
 
@@ -22,7 +28,7 @@ class TestNamedTupleAPI(unittest.TestCase):
         operators_found = set()
         regex = re.compile(r"^(\w*)\(")
         file = open(aten_native_yaml, 'r')
-        for f in yaml.load(file.read()):
+        for f in yaml.load(file.read(),Loader=Loader):
             f = f['func']
             ret = f.split('->')[1].strip()
             name = regex.findall(f)[0]

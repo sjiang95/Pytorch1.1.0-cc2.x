@@ -97,10 +97,7 @@ On Linux
 
 In `build.sh`, make sure `CC`, `CXX` and `CUDAHOSTCXX` points to the right `gcc&g++ 5.4.0` compiler. The `build.sh` will
 
-  1. install PyTorch automatically,
-
-and
-
+  1. install PyTorch automatically, and
   2. generate a `.whl` file at `/dist`.
 
 ## Building the Documentation

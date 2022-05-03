@@ -517,7 +517,7 @@ class clean(distutils.command.clean.clean):
                 else:
                     for filename in glob.glob(wildcard):
                         try:
-                            os.remove(filename)
+                            os.remove(filename) if not filename.startswith('dist/') else print(f"skip cleaning .whl(s) under {filename}")
                         except OSError:
                             shutil.rmtree(filename, ignore_errors=True)
 

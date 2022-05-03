@@ -83,7 +83,7 @@ conda install -c pytorch magma-cuda80
 ### Get the PyTorch Source
 
 ```bash
-git clone --recursive https://github.com/AdorableJiang/Pytorch1.1.0-cc2.x.git --branch v1.1.0 --single-branch pytorch110
+git clone --recursive https://github.com/AdorableJiang/Pytorch1.1.0-cc2.x.git --branch v1.1.0 pytorch110
 cd pytorch110
 ```
 
@@ -115,11 +115,18 @@ You can then build the documentation by running ``make <format>`` from the
 
 ## Torchvision
 
-Install torchvision from source for a complete Pytorch experience. Refer to the [table](https://github.com/pytorch/vision#installation), torchvision [0.3.0](https://github.com/pytorch/vision/tree/v0.3.0) should be installed from source. Notice that you may need to install `pillow` manually.
+Install torchvision from source for a complete Pytorch experience. Refer to the [table](https://github.com/pytorch/vision#installation), torchvision [0.3.0](https://github.com/pytorch/vision/tree/v0.3.0) should be installed from source. Notice that you may need to install `pillow<7.0` manually. `pillow>=7.0` is not compatible with torchvision 0.3.0 [#1712](https://github.com/pytorch/vision/issues/1712).
 
 ## Verifying
 
-Use [Pytorch examples](https://github.com/pytorch/examples) to verify installation.
+A simple test script is provided in branch `testtorch`.
+
+```bash
+git worktree add -b testtorch ../testtorch
+python3 ../testtorch/testtorch.py
+```
+
+Moreover, use [Pytorch examples](https://github.com/pytorch/examples) to verify installation.
 
 ## Known issue
 

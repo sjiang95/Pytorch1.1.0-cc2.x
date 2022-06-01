@@ -34,6 +34,10 @@ You can reuse your favorite Python packages such as NumPy, SciPy and Cython to e
 |:---:|:---:|:---:|:---:|:---:|
 |Ubuntu 20.04 LTS|5.4.0| 3.7 | 8.0 | Fermi (2.1) |
 
+### Driver
+
+If you use `.run` file to install NVIDIA driver, make sure `dkms` is installed before driver installation. And do remember to register the driver to `dkms` during driver installation. Otherwise, the driver will strike every time after Linux kernel update.
+
 ### Anaconda
 
 If you are installing from source, we highly recommend installing an [Anaconda](https://www.anaconda.com/distribution/#download-section) environment.
